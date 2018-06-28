@@ -1,5 +1,6 @@
 import React from 'react';
 import Votes from './Votes';
+import Avatar from './Avatar';
 import moment from 'moment';
 import {BASE_URL} from './constants';
 
@@ -8,8 +9,8 @@ const onChange = voteDelta => console.log(`Score changed by ${voteDelta}`);
 class Comment extends React.Component {
 
     state = {
-        avatarURL: "http://s3.amazonaws.com/hiphopdx-production/2016/02/Chuck-D_02-11-2016.jpg",
-        name: 'totty',
+        // avatar_url: "http://s3.amazonaws.com/hiphopdx-production/2016/02/Chuck-D_02-11-2016.jpg",
+        // name: 'totty',
     }
 
     componentDidMount () {
@@ -30,9 +31,7 @@ class Comment extends React.Component {
             <div className="media">
 
                 <div className="user media-left has-text-centered">
-                    <figure className="image is-64x64">
-                        <img src={avatar_url} alt={name}/>
-                    </figure>
+                    <Avatar {...{avatar_url, name}}/>
                     <p>{name}</p>
                     <p>{moment(created_at).fromNow()}</p>
                 </div>
