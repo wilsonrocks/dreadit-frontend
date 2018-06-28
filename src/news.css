@@ -9,3 +9,7 @@
 .no-vote {
     color: red;
 }
+
+.votes {
+    font-size: large;
+}

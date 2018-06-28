@@ -61,7 +61,7 @@ class Votes extends React.Component {
     render () {
         const {votes} = this.props;
         return (
-            <div>
+            <div className="votes">
                 <div>
                 <FontAwesomeIcon
                     className={`thumb ${this.state.vote === 'up' ? 'yes-vote': null}`}
