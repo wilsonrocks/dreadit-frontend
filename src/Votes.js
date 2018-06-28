@@ -18,19 +18,48 @@ class Votes extends React.Component {
         });
     }
 
+    currentVoteDelta () {
+        return {up:1, down:-1}[this.state.vote] || 0;
+    }
+
     voteUp = event => {
-        this.setState({vote: 'up'});
-        window.localStorage[this.props.id] = 'up'
+        const {vote} = this.state;
+        const {id, onChange} = this.props;
+        
+        if (vote === 'up') {
+            this.setState({vote: null});
+            window.localStorage.removeItem(id);
+            onChange(-1);
+        }
+        else {
+            const priorVotes =  this.currentVoteDelta();
+            this.setState({vote: 'up'});
+            window.localStorage[id] = 'up';
+            onChange(1 - priorVotes);
+        }
     }
 
     voteDown = event => {
-        this.setState({vote: 'down'});
-        window.localStorage[this.props.id] = 'down'
+        const {vote} = this.state;
+        const {id, onChange} = this.props;
+
+        if (vote === 'down') {
+            this.setState({vote: null});
+            window.localStorage.removeItem(id);
+            onChange(1)
+        }
+
+        else {
+            const priorVotes =  this.currentVoteDelta();
+            this.setState({vote: 'down'});
+            window.localStorage[id] = 'down';
+            onChange(-1 - priorVotes);
+        }
 
     }
 
     render () {
-        const {votes, onChange} = this.props;
+        const {votes} = this.props;
         return (
             <div>
                 <div>

@@ -10,7 +10,7 @@ class App extends Component {
         <Votes
           id="ID for something"
           votes={23}
-          onChange={() => console.log('voted!')}
+          onChange={voteDelta => console.log(`Score changed by ${voteDelta}`)}
         />
       </div>
     );
