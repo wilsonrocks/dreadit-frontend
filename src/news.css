@@ -13,3 +13,12 @@
 .votes {
     font-size: large;
 }
+
+.user {
+    width: 125px;
+}
+
+.is-horizontal-center {
+    justify-content: center;
+
+}
