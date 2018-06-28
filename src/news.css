@@ -1,0 +1,11 @@
+.thumb {
+    cursor: pointer;
+}
+
+.yes-vote {
+    color: green;
+}
+
+.no-vote {
+    color: red;
+}

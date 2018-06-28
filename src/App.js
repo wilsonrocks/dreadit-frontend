@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Votes from './Votes';
 import "bulma/css/bulma.css"
+import "./news.css"
 
 class App extends Component {
   render() {
@@ -8,7 +9,7 @@ class App extends Component {
       <div>
         <Votes
           id="ID for something"
-          votes={239768}
+          votes={23}
           onChange={() => console.log('voted!')}
         />
       </div>
