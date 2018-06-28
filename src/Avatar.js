@@ -16,7 +16,7 @@ class Avatar extends React.Component {
         if (wasError) return null;
         else {
             return (
-                <figure className="image is-64x64">
+                <figure className="image is-64x64 is-inline-block">
                     <img
                         src={avatar_url}
                         alt={name}
