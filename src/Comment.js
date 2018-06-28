@@ -12,12 +12,17 @@ class Comment extends React.Component {
 
     componentDidMount () {
         const {created_by} = this.props;
-        
+
+        if (localStorage[created_by]) this.setState(JSON.parse(localStorage[created_by]));
+
+        else {
             fetch(`${BASE_URL}/users/${created_by}`)
             .then(response => response.json())
-            .then(({user:{name, avatar_url}}) => {
+            .then( ({user: {name, avatar_url}}) => {
+                localStorage[created_by] = JSON.stringify({name, avatar_url});
                 this.setState({name, avatar_url});
             });
+        }
     }
 
 
