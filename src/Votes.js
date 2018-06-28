@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faThumbsUp } from '@fortawesome/free-solid-svg-icons'
-import { faThumbsDown } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -14,7 +14,7 @@ class Votes extends React.Component {
 
     componentDidMount () {
         this.setState({
-            vote: window.localStorage[this.props.id] || null,
+            vote: window.localStorage[this.props._id] || null,
         });
     }
 
@@ -22,37 +22,37 @@ class Votes extends React.Component {
         return {up:1, down:-1}[this.state.vote] || 0;
     }
 
-    voteUp = event => {
+    voteUp = () => {
         const {vote} = this.state;
-        const {id, onChange} = this.props;
+        const {_id, onChange} = this.props;
         
         if (vote === 'up') {
             this.setState({vote: null});
-            window.localStorage.removeItem(id);
+            window.localStorage.removeItem(_id);
             onChange(-1);
         }
         else {
             const priorVotes =  this.currentVoteDelta();
             this.setState({vote: 'up'});
-            window.localStorage[id] = 'up';
+            window.localStorage[_id] = 'up';
             onChange(1 - priorVotes);
         }
     }
 
-    voteDown = event => {
+    voteDown = () => {
         const {vote} = this.state;
-        const {id, onChange} = this.props;
+        const {_id, onChange} = this.props;
 
         if (vote === 'down') {
             this.setState({vote: null});
-            window.localStorage.removeItem(id);
+            window.localStorage.removeItem(_id);
             onChange(1)
         }
 
         else {
             const priorVotes =  this.currentVoteDelta();
             this.setState({vote: 'down'});
-            window.localStorage[id] = 'down';
+            window.localStorage[_id] = 'down';
             onChange(-1 - priorVotes);
         }
 

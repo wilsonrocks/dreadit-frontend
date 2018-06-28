@@ -8,10 +8,7 @@ const onChange = voteDelta => console.log(`Score changed by ${voteDelta}`);
 
 class Comment extends React.Component {
 
-    state = {
-        // avatar_url: "http://s3.amazonaws.com/hiphopdx-production/2016/02/Chuck-D_02-11-2016.jpg",
-        // name: 'totty',
-    }
+    state = {};
 
     componentDidMount () {
         const {created_by} = this.props;
@@ -25,7 +22,7 @@ class Comment extends React.Component {
 
 
     render () {
-        const {created_at, votes, body, id} = this.props;
+        const {created_at, votes, body, _id} = this.props;
         const {avatar_url, name} = this.state;
         return (
             <div className="media">
@@ -41,7 +38,7 @@ class Comment extends React.Component {
                     <Votes
                         onChange={onChange}
                         votes={votes}
-                        id={id}
+                        _id={_id}
                     />
                 </div>
             </div>

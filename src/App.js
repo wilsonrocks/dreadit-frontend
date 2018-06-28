@@ -87,13 +87,6 @@ class App extends Component {
         {mocks.map(mock => {
           return <Comment
             {...mock}
-
-            // timestamp={mock.created_at}
-            // votes={mock.votes}
-            // body={mock.body}
-            // name="Fake Name"
-            // avatarURL="http://s3.amazonaws.com/hiphopdx-production/2016/02/Chuck-D_02-11-2016.jpg"
-            // id={mock._id}
             key={mock._id}
         />
         })}
