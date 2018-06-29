@@ -20,5 +20,17 @@
 
 .is-horizontal-center {
     justify-content: center;
+}
 
+.logo {
+    width: 100px;
+    height: 80px;
+}
+
+.dreadit {
+    line-height:80px;
+}
+
+.logo-with-words {
+    margin: 1.5rem;
 }
