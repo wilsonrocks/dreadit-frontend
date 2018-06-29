@@ -11,9 +11,10 @@ class Article extends React.Component {
     };
   
     componentDidMount () {
-      fetch(`${BASE_URL}/articles/5b340bb9f0ac620014eca857`)
-      .then(response => response.json())
-      .then(article => this.setState(article))
+        const {_id} = this.props;
+        fetch(`${BASE_URL}/articles/${_id}`)
+            .then(response => response.json())
+            .then(article => this.setState(article))
     };
   
     render () {
