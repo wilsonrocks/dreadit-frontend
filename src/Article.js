@@ -11,7 +11,7 @@ class Article extends React.Component {
     };
   
     componentDidMount () {
-        const {_id} = this.props;
+        const {_id} = this.props.match.params;
         fetch(`${BASE_URL}/articles/${_id}`)
             .then(response => response.json())
             .then(article => this.setState(article))

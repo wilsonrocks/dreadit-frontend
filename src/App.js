@@ -4,6 +4,7 @@ import Latest from './Latest';
 import Hottest from './Hottest';
 import Authors from './Authors';
 import Topics from './Topics';
+import Article from './Article';
 
 import {BrowserRouter, Route, Link, Switch} from 'react-router-dom';
 
@@ -19,7 +20,7 @@ function NavBar () {
   <section>
     <nav className="navbar">
       <div className="navbar-brand logo-with-words">  
-        <Link to="/"> <img src={logo} className="logo"/></Link>
+        <Link to="/"> <img src={logo} alt="" className="logo"/></Link>
         <Link to="/"><span className="title dreadit">DREADIT</span></Link>
       </div>
       <div className="level-item">
@@ -43,6 +44,7 @@ function App () {
           <Route path="/authors" component={Authors}/>
           <Route path="/topics" component={Topics}/>
           <Route path="/hottest" component={Hottest}/>
+          <Route path="/article/:_id" component={Article}/>
         </Switch>
       </div>
     </BrowserRouter>
