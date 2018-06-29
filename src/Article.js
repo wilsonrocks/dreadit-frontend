@@ -21,10 +21,7 @@ class Article extends React.Component {
       const {article} = this.state;
       return article ? <DisplayArticle {...article}/>:null;
     };
-  
   }
-  
-
 
 class DisplayArticle extends React.Component {
     
@@ -50,17 +47,31 @@ class DisplayArticle extends React.Component {
 
     };
 
+    changeVoting = (_id, delta) => {
+        const {comments} = this.state;
+        
+        const newComments =
+            comments.map(comment => {
+                const changedVote = comment.votes + (delta > 0 ? 1 : -1);
+                return (comment._id === _id) ? {...comment, votes:changedVote} : comment;
+            });
+
+        this.setState({comments: newComments});
+    };
+
     render () {
         const {title, body} = this.props
         const {topic, name, avatar_url, comments} = this.state;
+
         return (
-        <div className="article section">
-            <p className="is-size-3"> {topic} </p>
-            <h1 className="title">{title}</h1>
-            <h2 className="subtitle"><Avatar avatar_url={avatar_url}/>{name}</h2>
-            <p>{body}</p>
-            <CommentList comments={comments}/>
-        </div>);
+            <div className="article section">
+                <p className="is-size-3"> {topic} </p>
+                <h1 className="title">{title}</h1>
+                <h2 className="subtitle"><Avatar avatar_url={avatar_url}/>{name}</h2>
+                <p>{body}</p>
+                <CommentList comments={comments} changeVoting={this.changeVoting}/>
+            </div>
+        );
     };
 }
 

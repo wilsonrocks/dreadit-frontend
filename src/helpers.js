@@ -26,3 +26,7 @@ export function getDetailsFromTopicId (topicId) {
         });
     }
 }
+
+export function submitCommentVote (_id, vote) {
+    return fetch(`${BASE_URL}/comments/${_id}?vote=${vote}`, {method: 'PUT'})
+}

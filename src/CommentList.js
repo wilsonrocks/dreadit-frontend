@@ -30,12 +30,14 @@ class CommentList extends React.Component {
   };
 
   render () {
-    const {comments} = this.props;
+    const {comments, changeVoting} = this.props;
     const sortedComments = sortItems(comments, this.state.orderBy);
 
     return (
       <div className="comment-list section">
+
         <p className="is-size-5">Comments</p>
+
         <div className="level">
           <div className="level-left">
             <OrderDropDown className="level-item" onChange={this.changeOrder}/>
@@ -45,6 +47,7 @@ class CommentList extends React.Component {
         {sortedComments.map(comment => {
           return <Comment
             {...comment}
+            changeVoting = {changeVoting}
             key={comment._id}
           />
         })}

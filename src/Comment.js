@@ -2,9 +2,9 @@ import React from 'react';
 import Votes from './Votes';
 import Avatar from './Avatar';
 import moment from 'moment';
-import {getDetailsFromUserId} from './helpers';
-
-const onChange = voteDelta => console.log(`Score changed by ${voteDelta}`);
+import {
+    getDetailsFromUserId,
+    submitCommentVote,} from './helpers';
 
 class Comment extends React.Component {
 
@@ -15,9 +15,21 @@ class Comment extends React.Component {
 
         getDetailsFromUserId(created_by)
         .then(details => this.setState(details));
-
     }
 
+    onChange = voteDelta => {
+        const {_id} = this.props;
+        if (voteDelta !== 0) {
+            const vote = voteDelta > 0 ? 'up' : 'down';
+            const times = Math.abs(voteDelta);
+            for (let i = 0; i < times; i++) {
+                submitCommentVote(_id, vote)
+                .then(response => {
+                    if (response.ok) this.props.changeVoting(this.props._id, vote === 'up' ? 1 : -1);
+                });
+            }
+        }
+    }
 
     render () {
         const {created_at, votes, body, _id} = this.props;
@@ -34,7 +46,7 @@ class Comment extends React.Component {
                 <div className="media-content">
                     {body}
                     <Votes
-                        onChange={onChange}
+                        onChange={this.onChange}
                         votes={votes}
                         _id={_id}
                     />
