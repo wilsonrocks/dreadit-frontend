@@ -14,7 +14,11 @@ class Article extends React.Component {
         const {_id} = this.props.match.params;
         fetch(`${BASE_URL}/articles/${_id}`)
             .then(response => response.json())
-            .then(article => this.setState(article))
+            .then(article => {
+                this.setState(article, () => {
+                    document.title = this.state.article.title;
+                });
+            })
     };
   
     render () {
