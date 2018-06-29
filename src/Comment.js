@@ -2,7 +2,7 @@ import React from 'react';
 import Votes from './Votes';
 import Avatar from './Avatar';
 import moment from 'moment';
-import {BASE_URL} from './constants';
+import {getDetailsFromUserId} from './helpers';
 
 const onChange = voteDelta => console.log(`Score changed by ${voteDelta}`);
 
@@ -13,16 +13,9 @@ class Comment extends React.Component {
     componentDidMount () {
         const {created_by} = this.props;
 
-        if (localStorage[created_by]) this.setState(JSON.parse(localStorage[created_by]));
+        getDetailsFromUserId(created_by)
+        .then(details => this.setState(details));
 
-        else {
-            fetch(`${BASE_URL}/users/${created_by}`)
-            .then(response => response.json())
-            .then( ({user: {name, avatar_url}}) => {
-                localStorage[created_by] = JSON.stringify({name, avatar_url});
-                this.setState({name, avatar_url});
-            });
-        }
     }
 
 
