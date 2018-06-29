@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Comment from './Comment';
+import CommentList from './CommentList';
 import "bulma/css/bulma.css"
 import "./news.css"
 
@@ -76,23 +76,12 @@ const mocks =  [
     "created_by": "5b340bb9f0ac620014eca846",
     "__v": 0
     }
-    ]
+    ];
+    
 
 
-class App extends Component {
-
-  render() {
-    return (
-      <div className="section">
-        {mocks.map(mock => {
-          return <Comment
-            {...mock}
-            key={mock._id}
-        />
-        })}
-      </div>
-    );
-  }
+function App () {
+  return <CommentList comments={mocks}/>;
 }
 
 export default App;
