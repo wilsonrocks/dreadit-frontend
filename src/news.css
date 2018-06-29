@@ -3,11 +3,11 @@
 }
 
 .yes-vote {
-    color: green;
+    color: hsl(141, 71%, 48%);
 }
 
 .no-vote {
-    color: red;
+    color: hsl(348, 100%, 61%);
 }
 
 .votes {

@@ -1,35 +1,51 @@
 import React from 'react';
-import Article from './Article';
-import logo from './assets/drawing.svg'
+
+import Latest from './Latest';
+import Hottest from './Hottest';
+import Authors from './Authors';
+import Topics from './Topics';
+
+import {BrowserRouter, Route, Link, Switch} from 'react-router-dom';
+
 import "bulma/css/bulma.css";
+
+
+import logo from './assets/drawing.svg'
 import "./news.css";
 
 
+function NavBar () {
+  return (
+  <section>
+    <nav className="navbar">
+      <div className="navbar-brand logo-with-words">  
+        <Link to="/"> <img src={logo} className="logo"/></Link>
+        <Link to="/"><span className="title dreadit">DREADIT</span></Link>
+      </div>
+      <div className="level-item">
+        <Link to="/latest" className="navbar-item">Latest</Link>
+        <Link to="/hottest" className="navbar-item">Hottest</Link>
+        <Link to="/authors" className="navbar-item">Authors</Link>
+        <Link to="/topics" className="navbar-item">Topics</Link>
+      </div>
+    </nav>
+  </section>);
+}
+
 function App () {
     return (
-
-    <div className="app">
-
-      <section >
-      
-      <nav className="navbar">
-      
-      <div className="navbar-brand logo-with-words">  
-        <img src={logo} className="logo"/>
-        <span className="title dreadit">DREADIT</span>
+    <BrowserRouter>
+      <div className="app">
+        <NavBar/>
+        <Switch>
+          <Route exact path="/" component={Latest}/>
+          <Route path="/latest" component={Latest}/>
+          <Route path="/authors" component={Authors}/>
+          <Route path="/topics" component={Topics}/>
+          <Route path="/hottest" component={Hottest}/>
+        </Switch>
       </div>
-
-        <div className="level-item">
-
-            <a className="navbar-item">Latest</a>
-            <a className="navbar-item">Hottest</a>
-            <a className="navbar-item">Authors</a>
-            </div>
-          </nav>
-
-      </section>
-      <Article _id="5b340bb9f0ac620014eca86f"/>
-    </div>
+    </BrowserRouter>
     );
   };
 
