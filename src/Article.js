@@ -5,11 +5,32 @@ import {BASE_URL} from './constants';
 import {getDetailsFromUserId, getDetailsFromTopicId} from './helpers';
 
 class Article extends React.Component {
+
+    state = {
+      article: null,
+    };
+  
+    componentDidMount () {
+      fetch(`${BASE_URL}/articles/5b340bb9f0ac620014eca857`)
+      .then(response => response.json())
+      .then(article => this.setState(article))
+    };
+  
+    render () {
+      const {article} = this.state;
+      return article ? <DisplayArticle {...article}/>:null;
+    };
+  
+  }
+  
+
+
+class DisplayArticle extends React.Component {
     
     state = {
         name: null,
-        topic: 'cider',
-        avatar_url: 'https://vignette.wikia.nocookie.net/mlpfanart/images/8/8e/Rainbow_Dash_by_Nethear.png/revision/latest?cb=20120530035934',
+        topic: null,
+        avatar_url: null,
         comments: [],
     };
 
@@ -25,8 +46,6 @@ class Article extends React.Component {
 
         getDetailsFromTopicId(belongs_to)
         .then(details => this.setState(details));
-
-
 
     };
 
@@ -44,4 +63,4 @@ class Article extends React.Component {
     };
 }
 
-export default Article
+export default Article;
