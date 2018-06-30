@@ -1,5 +1,6 @@
 import React from 'react';
 import Comment from './Comment'
+import AddComment from './AddComment';
 
 function OrderDropDown ({onChange}) {
   return (
@@ -22,6 +23,7 @@ class CommentList extends React.Component {
 
   state = {
     orderBy: 'created_at',
+    refresh: false
   };
 
   changeOrder = ({target:{value}}) => {
@@ -29,18 +31,27 @@ class CommentList extends React.Component {
     this.setState({orderBy:value});
   };
 
+  
+
   render () {
-    const {comments, changeVoting} = this.props;
+    const {comments, changeVoting, _id} = this.props;
     const sortedComments = sortItems(comments, this.state.orderBy);
 
     return (
       <div className="comment-list section">
 
-        <p className="is-size-5">Comments</p>
 
         <div className="level">
           <div className="level-left">
-            <OrderDropDown className="level-item" onChange={this.changeOrder}/>
+            <p className="is-size-5">Comments</p>
+          </div>
+          <div className="level-item">
+          <OrderDropDown className="level-item" onChange={this.changeOrder}/>
+          </div>
+          <div className="level-item">
+          <AddComment
+            _id={_id}
+          />
           </div>
         </div>
 

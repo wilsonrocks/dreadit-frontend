@@ -20,7 +20,7 @@ class Article extends React.Component {
                 });
             })
     };
-  
+
     render () {
       const {article} = this.state;
       return article ? <DisplayArticle {...article}/>:null;
@@ -64,7 +64,7 @@ class DisplayArticle extends React.Component {
     };
 
     render () {
-        const {title, body} = this.props
+        const {title, body, _id} = this.props
         const {topic, name, avatar_url, comments} = this.state;
 
         return (
@@ -73,7 +73,10 @@ class DisplayArticle extends React.Component {
                 <h1 className="title">{title}</h1>
                 <h2 className="subtitle"><Avatar avatar_url={avatar_url}/>{name}</h2>
                 <p>{body}</p>
-                <CommentList comments={comments} changeVoting={this.changeVoting}/>
+                <CommentList
+                    comments={comments}
+                    changeVoting={this.changeVoting}
+                    _id={_id}/>
             </div>
         );
     };
