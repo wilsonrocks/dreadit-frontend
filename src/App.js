@@ -5,6 +5,7 @@ import Hottest from './Hottest';
 import Authors from './Authors';
 import Topics from './Topics';
 import Article from './Article';
+import NotFound from './NotFound';
 
 import {BrowserRouter, Route, Link, Switch} from 'react-router-dom';
 
@@ -45,6 +46,7 @@ function App () {
           <Route path="/topics" component={Topics}/>
           <Route path="/hottest" component={Hottest}/>
           <Route path="/article/:_id" component={Article}/>
+          <Route component={NotFound}/>
         </Switch>
       </div>
     </BrowserRouter>

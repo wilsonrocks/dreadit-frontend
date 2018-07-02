@@ -1,28 +1,40 @@
 import React from 'react';
 import Avatar from './Avatar';
 import CommentList from './CommentList';
+import NotFound from './NotFound';
+
 import {BASE_URL} from './constants';
 import {getDetailsFromUserId, getDetailsFromTopicId} from './helpers';
+import ServerError from './ServerError';
 
 class Article extends React.Component {
 
     state = {
       article: null,
+      error: null,
     };
   
     componentDidMount () {
         const {_id} = this.props.match.params;
         fetch(`${BASE_URL}/articles/${_id}`)
-            .then(response => response.json())
+            .then(response => {
+                if (response.ok) return response.json();
+                else throw new Error(response.status)
+            })
             .then(article => {
                 this.setState(article, () => {
                     document.title = this.state.article.title;
                 });
             })
+            .catch(({message}) => {
+                this.setState({error: message});
+            });
     };
 
     render () {
-      const {article} = this.state;
+      const {article, error} = this.state;
+      if (error === '500') return <ServerError/>;
+      if (error) return <NotFound/>;
       return article ? <DisplayArticle {...article}/>:null;
     };
   }

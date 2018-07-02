@@ -10,7 +10,6 @@ return (
         <p> Perhaps you would like to check out some <Link to="/">cool articles</Link> instead?</p>
 
     </div>
-
 );
 }
 
