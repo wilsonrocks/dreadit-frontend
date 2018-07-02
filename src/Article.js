@@ -5,6 +5,8 @@ import CommentList from './CommentList';
 import NotFound from './NotFound';
 import ServerError from './ServerError';
 
+import {Redirect} from 'react-router-dom';
+
 import {BASE_URL} from './constants';
 import {getDetailsFromUserId, getDetailsFromTopicId} from './helpers';
 

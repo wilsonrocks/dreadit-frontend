@@ -39,7 +39,7 @@ function App () {
       <div className="app">
         <NavBar/>
         <Switch>
-          <Redirect from="/" to="/latest"/>
+          <Redirect exact from="/" to="/latest"/>
           <Route path="/latest" component={ArticleList}/>
 
           <Route path="/hottest" component={ArticleList}/>

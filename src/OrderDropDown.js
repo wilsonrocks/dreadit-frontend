@@ -5,10 +5,10 @@ function OrderDropDown ({onChange, entries}) {
       <div className= "select" onChange={onChange}>
         <select>
           {entries.map(entry => {
-            <option value={entry.value}>{entry.text}</option>
+            return <option
+              value={entry.value}
+              key={entry.value}>{entry.text}</option>
           })}
-          <option value="time">Newest</option>
-          <option value="votes">Most Votes</option>
         </select>
       </div>
     );
