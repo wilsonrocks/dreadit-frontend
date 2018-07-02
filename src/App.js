@@ -6,7 +6,7 @@ import Topics from './Topics';
 import Article from './Article';
 import NotFound from './NotFound';
 
-import {BrowserRouter, Route, Link, Switch} from 'react-router-dom';
+import {BrowserRouter, Route, Link, Switch, Redirect} from 'react-router-dom';
 
 import "bulma/css/bulma.css";
 
@@ -20,8 +20,8 @@ function NavBar () {
   <section>
     <nav className="navbar">
       <div className="navbar-brand logo-with-words">  
-        <Link to="/"> <img src={logo} alt="" className="logo"/></Link>
-        <Link to="/"><span className="title dreadit">DREADIT</span></Link>
+        <Link to="/latest"> <img src={logo} alt="" className="logo"/></Link>
+        <Link to="/latest"><span className="title dreadit">DREADIT</span></Link>
       </div>
       <div className="level-item">
         <Link to="/latest" className="navbar-item">Latest</Link>
@@ -39,8 +39,9 @@ function App () {
       <div className="app">
         <NavBar/>
         <Switch>
-          <Route exact path="/" component={ArticleList}/>
+          <Redirect from="/" to="/latest"/>
           <Route path="/latest" component={ArticleList}/>
+
           <Route path="/hottest" component={ArticleList}/>
           <Route path="/authors" component={Authors}/>
           <Route path="/topics" component={Topics}/>
