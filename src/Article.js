@@ -1,11 +1,12 @@
 import React from 'react';
 import Avatar from './Avatar';
+
 import CommentList from './CommentList';
 import NotFound from './NotFound';
+import ServerError from './ServerError';
 
 import {BASE_URL} from './constants';
 import {getDetailsFromUserId, getDetailsFromTopicId} from './helpers';
-import ServerError from './ServerError';
 
 class Article extends React.Component {
 

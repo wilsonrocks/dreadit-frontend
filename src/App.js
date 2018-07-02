@@ -1,7 +1,6 @@
 import React from 'react';
 
-import Latest from './Latest';
-import Hottest from './Hottest';
+import ArticleList from './ArticleList';
 import Authors from './Authors';
 import Topics from './Topics';
 import Article from './Article';
@@ -40,11 +39,11 @@ function App () {
       <div className="app">
         <NavBar/>
         <Switch>
-          <Route exact path="/" component={Latest}/>
-          <Route path="/latest" component={Latest}/>
+          <Route exact path="/" component={ArticleList}/>
+          <Route path="/latest" component={ArticleList}/>
+          <Route path="/hottest" component={ArticleList}/>
           <Route path="/authors" component={Authors}/>
           <Route path="/topics" component={Topics}/>
-          <Route path="/hottest" component={Hottest}/>
           <Route path="/article/:_id" component={Article}/>
           <Route component={NotFound}/>
         </Switch>
