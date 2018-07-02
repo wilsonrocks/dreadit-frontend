@@ -1,17 +1,13 @@
 import React from 'react';
 import Comment from './Comment'
 import AddComment from './AddComment';
+import OrderDropDown from './OrderDropDown';
 
-function OrderDropDown ({onChange}) {
-  return (
-    <div className= "select" onChange={onChange}>
-      <select>
-        <option value="time">Newest</option>
-        <option value="votes">Most Votes</option>
-      </select>
-    </div>
-  );
-}
+const orders = [
+  {value: 'time', text:'Newest'},
+  {value: 'votes', text:'Most Votes'},
+];
+
 
 function sortItems (items, field) {
   return items.sort( (a,b) => {
@@ -46,7 +42,7 @@ class CommentList extends React.Component {
             <p className="is-size-5">Comments</p>
           </div>
           <div className="level-item">
-          <OrderDropDown className="level-item" onChange={this.changeOrder}/>
+          <OrderDropDown className="level-item" onChange={this.changeOrder} entries={orders}/>
           </div>
           <div className="level-item">
           <AddComment
