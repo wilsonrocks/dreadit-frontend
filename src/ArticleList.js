@@ -25,10 +25,10 @@ class ArticleList extends React.Component {
     render () {
         const {articles} = this.state;
         return (
-            <div className="ArticleList">
+            <div className="ArticleList section">
             {articles.map(
                 article => {
-                    return <ArticlePreview {...article}/>
+                    return <ArticlePreview {...article} key={article._id}/>
                 }
             )}
             </div>
