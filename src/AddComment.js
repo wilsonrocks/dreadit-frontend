@@ -28,7 +28,10 @@ class AddComment extends React.Component{
             if (response.ok) {
                 this.setState({active:false});
             }
-        });
+            else throw new Error('problemSubmittingComment');
+            return response.json()
+        })
+        .then(({created}) => this.props.optimisticallyAddComment(created));
     }
 
     render () {

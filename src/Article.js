@@ -63,6 +63,15 @@ class DisplayArticle extends React.Component {
         this.setState({comments: newComments});
     };
 
+    optimisticallyAddComment = (comment) => {
+        console.dir(this.state);
+
+        this.setState({comments: 
+            [...this.state.comments, comment]
+        });
+
+    }
+
     render () {
         const {title, body, _id} = this.props
         const {topic, name, avatar_url, comments} = this.state;
@@ -76,7 +85,9 @@ class DisplayArticle extends React.Component {
                 <CommentList
                     comments={comments}
                     changeVoting={this.changeVoting}
-                    _id={_id}/>
+                    _id={_id}
+                    optimisticallyAddComment={this.optimisticallyAddComment}
+                    />
             </div>
         );
     };

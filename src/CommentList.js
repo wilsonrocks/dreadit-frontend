@@ -34,7 +34,7 @@ class CommentList extends React.Component {
   
 
   render () {
-    const {comments, changeVoting, _id} = this.props;
+    const {comments, changeVoting, _id, optimisticallyAddComment} = this.props;
     const sortedComments = sortItems(comments, this.state.orderBy);
 
     return (
@@ -51,6 +51,8 @@ class CommentList extends React.Component {
           <div className="level-item">
           <AddComment
             _id={_id}
+            optimisticallyAddComment={optimisticallyAddComment}
+
           />
           </div>
         </div>
