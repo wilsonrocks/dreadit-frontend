@@ -5,10 +5,8 @@ import CommentList from './CommentList';
 import NotFound from './NotFound';
 import ServerError from './ServerError';
 
-// import {Redirect} from 'react-router-dom';
-
 import {BASE_URL} from './constants';
-import {getDetailsFromUserId, getDetailsFromTopicId} from './helpers';
+import {getDetailsFromTopicId} from './helpers';
 
 class Article extends React.Component {
 
@@ -24,8 +22,8 @@ class Article extends React.Component {
                 if (response.ok) return response.json();
                 else throw new Error(response.status)
             })
-            .then(article => {
-                this.setState(article, () => {
+            .then(({article}) => {
+                this.setState({article}, () => {
                     document.title = this.state.article.title;
                 });
             })
@@ -52,14 +50,16 @@ class DisplayArticle extends React.Component {
     };
 
     componentDidMount () {
-        const {_id, created_by, belongs_to} = this.props;
+        const {_id, belongs_to} = this.props;
+        const {created_by: {avatar_url, name}} = this.props;
 
         fetch(`${BASE_URL}/articles/${_id}/comments`)
-        .then(response => response.json())
+        .then(response => {
+            return response.json()}
+        )
         .then(({comments}) => this.setState({comments}));
 
-        getDetailsFromUserId(created_by)
-        .then(details => this.setState(details));
+        this.setState({avatar_url, name});
 
         getDetailsFromTopicId(belongs_to)
         .then(details => this.setState(details));
