@@ -26,11 +26,13 @@ class ArticleList extends React.Component {
         const {articles} = this.state;
         return (
             <div className="ArticleList section">
-            {articles.map(
-                article => {
-                    return <ArticlePreview {...article} key={article._id}/>
-                }
-            )}
+                <div className="columns is-multiline">
+                    {articles.map(
+                        article => {
+                            return <ArticlePreview {...article} key={article._id}/>
+                        }
+                    )}
+                </div>
             </div>
         );
     }
