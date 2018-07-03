@@ -6,7 +6,6 @@ import NotFound from './NotFound';
 import ServerError from './ServerError';
 
 import {BASE_URL} from './constants';
-import {getDetailsFromTopicId} from './helpers';
 
 class Article extends React.Component {
 
@@ -14,7 +13,7 @@ class Article extends React.Component {
       article: null,
       error: null,
     };
-  
+
     componentDidMount () {
         const {_id} = this.props.match.params;
         fetch(`${BASE_URL}/articles/${_id}`)
@@ -41,7 +40,7 @@ class Article extends React.Component {
   }
 
 class DisplayArticle extends React.Component {
-    
+
     state = {
         name: null,
         topic: null,
@@ -59,16 +58,12 @@ class DisplayArticle extends React.Component {
         )
         .then(({comments}) => this.setState({comments}));
 
-        this.setState({avatar_url, name});
-
-        getDetailsFromTopicId(belongs_to)
-        .then(details => this.setState(details));
-
+        this.setState({avatar_url, name, topicName: belongs_to.title});
     };
 
     changeVoting = (_id, delta) => {
         const {comments} = this.state;
-        
+
         const newComments =
             comments.map(comment => {
                 const changedVote = comment.votes + (delta > 0 ? 1 : -1);
@@ -81,7 +76,7 @@ class DisplayArticle extends React.Component {
     optimisticallyAddComment = (comment) => {
         console.dir(this.state);
 
-        this.setState({comments: 
+        this.setState({comments:
             [...this.state.comments, comment]
         });
 
@@ -89,11 +84,11 @@ class DisplayArticle extends React.Component {
 
     render () {
         const {title, body, _id} = this.props
-        const {topic, name, avatar_url, comments} = this.state;
+        const {name, avatar_url, comments, topicName} = this.state;
 
         return (
             <div className="article section">
-                <p className="is-size-3"> {topic} </p>
+                <p className="is-size-3"> {topicName} </p>
                 <h1 className="title">{title}</h1>
                 <h2 className="subtitle"><Avatar avatar_url={avatar_url}/>{name}</h2>
                 <p>{body}</p>
