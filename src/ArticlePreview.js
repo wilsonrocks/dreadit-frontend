@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 
 import Avatar from './Avatar';
+import TopicName from './TopicName';
 import AuthorName from './AuthorName';
 
 function ArticlePreview ({_id, title, votes, belongs_to, created_by:{avatar_url, name, _id:author_id}}) {
@@ -14,7 +15,7 @@ function ArticlePreview ({_id, title, votes, belongs_to, created_by:{avatar_url,
                 </div>
 
                 <div className="media-body">
-                    <p>{belongs_to.title}</p>
+                    <TopicName name={belongs_to.title} _id={belongs_to._id}></TopicName>
                     <Link to={`/articles/${_id}`}>{title}</Link>
                 </div>
 

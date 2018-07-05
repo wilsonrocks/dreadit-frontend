@@ -3,11 +3,13 @@ import Avatar from './Avatar';
 import AuthorName from './AuthorName';
 
 import CommentList from './CommentList';
+import TopicName from './TopicName';
 
 import NotFound from './NotFound';
 import ServerError from './ServerError';
 
 import {BASE_URL} from './constants';
+import { getDetailsFromTopicId } from './helpers';
 
 class Article extends React.Component {
 
@@ -35,9 +37,9 @@ class Article extends React.Component {
         .then(({article}) => {
             const {_id, votes, title, body} = article;
             const {name: authorName, avatar_url: avatarUrl} = article.created_by;
-            const {title: topicName} = article.belongs_to;
+            const {title: topicName, _id: topicId} = article.belongs_to;
             this.setState({article:{
-                _id, votes, title, body, authorName, avatarUrl, topicName
+                _id, votes, title, body, authorName, avatarUrl, topicName, topicId
             }})
             
         })
@@ -70,12 +72,16 @@ class Article extends React.Component {
     }
 
     render () {
-        const {topicName, title, avatarUrl, authorName,
+        const {topicName, topicId, title, avatarUrl, authorName,
             authorId, body, _id} = this.state.article;
         const {comments} = this.state;
         return (
             <div className="article section">
-                <p className="is-size-3"> {topicName} </p>
+                <TopicName
+                    className="is-size-3"
+                    name={topicName}
+                    _id={topicId}
+                />
                 <h1 className="title">{title}</h1>
                  <h2 className="subtitle">
                      <Avatar avatar_url={avatarUrl}/>
