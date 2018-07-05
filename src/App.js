@@ -20,7 +20,15 @@ function App () {
         <Switch>
           <Redirect exact from="/" to="/articles`"/>
           <Route exact path="/articles" component={ArticleList}/>
-          <Route path="/authors" component={Authors}/>
+          <Route exact path="/authors" component={Authors}/>
+
+          <Route path="/authors/:_id" render = {({match}) =>(
+            <Redirect to={{
+              pathname: '/articles',
+              state: {authorFilter: match.params._id}
+            }}/>
+          )} />
+
           <Route path="/topics" component={Topics}/>
           <Route path="/articles/:_id" component={Article}/>
           <Route component={NotFound}/>

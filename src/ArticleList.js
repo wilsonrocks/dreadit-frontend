@@ -4,10 +4,8 @@ import {BASE_URL} from './constants';
 import ArticlePreview from './ArticlePreview';
 import OrderDropDown from './OrderDropDown';
 
-
 const everyone = {value: '', text: 'Everyone'};
 const allTopics = {value: null, text: 'All Topics'};
-
 
 class ArticleList extends React.Component {
 
@@ -20,6 +18,11 @@ class ArticleList extends React.Component {
     }
 
     componentDidMount () {
+
+        const passedAuthorFilter = this.props.location.state.authorFilter;
+        console.log(passedAuthorFilter);
+        if (passedAuthorFilter) this.setState({authorFilter: passedAuthorFilter});
+
         fetch(`${BASE_URL}/articles`)
         .then(response => response.json())
         .then(({articles}) => {
@@ -45,14 +48,6 @@ class ArticleList extends React.Component {
         });
     }
 
-
-    filterAuthors = (name) => {
-
-        const {authorFilter, authors} = this.state;
-
-        if (name === '') return authors;
-        return authors.filter(author => author.created_by._id === authorFilter);
-    }
 
     filteredArticles =  () => {
         const {authorFilter, articles} = this.state;
@@ -82,6 +77,7 @@ class ArticleList extends React.Component {
 
     render () {
         const {topics, authors} = this.state;
+        console.log(this.state.authorFilter);
         
         return (
             <div className="ArticleList section">
@@ -92,6 +88,8 @@ class ArticleList extends React.Component {
                     /> by <OrderDropDown
                         entries={authors}
                         onChange={this.changeAuthorFilter}
+                        selected={this.state.authorFilter}
+
                     />
                 </div>
                 <div className="columns is-multiline">
