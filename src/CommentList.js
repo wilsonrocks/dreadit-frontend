@@ -48,6 +48,7 @@ class CommentList extends React.Component {
           return <Comment
             {...comment}
             changeVoting = {changeVoting}
+            articleId = {_id}
             key={comment._id}
           />
         })}

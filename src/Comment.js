@@ -1,6 +1,7 @@
 import React from 'react';
 import Votes from './Votes';
 import Avatar from './Avatar';
+import AuthorName from './AuthorName';
 import moment from 'moment';
 import {
     getDetailsFromUserId,
@@ -32,14 +33,18 @@ class Comment extends React.Component {
     }
 
     render () {
-        const {created_at, votes, body, _id} = this.props;
+        const {created_at, votes, body, _id, created_by} = this.props;
         const {avatar_url, name} = this.state;
         return (
             <div className="media">
 
                 <div className="user media-left has-text-centered">
-                    <Avatar {...{avatar_url, name}}/>
-                    <p>{name}</p>
+                    <Avatar 
+                    avatar_url={avatar_url}
+                    name={name}
+                    _id={created_by}
+                    />
+                    <AuthorName name={name} _id={created_by}/>
                     <p>{moment(created_at).fromNow()}</p>
                 </div>
 
