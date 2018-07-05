@@ -29,6 +29,13 @@ function App () {
             }}/>
           )} />
 
+          <Route path="/topics/:_id" render = {({match}) =>(
+            <Redirect to={{
+              pathname: '/articles',
+              state: {topicFilter: match.params._id}
+            }}/>
+          )} />
+
           <Route path="/topics" component={Topics}/>
           <Route path="/articles/:_id" component={Article}/>
           <Route component={NotFound}/>

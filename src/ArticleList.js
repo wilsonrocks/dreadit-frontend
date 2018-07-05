@@ -20,8 +20,9 @@ class ArticleList extends React.Component {
     componentDidMount () {
 
         const passedAuthorFilter = this.props.location.state.authorFilter;
-        console.log(passedAuthorFilter);
         if (passedAuthorFilter) this.setState({authorFilter: passedAuthorFilter});
+        const passedTopicFilter = this.props.location.state.topicFilter;
+        if (passedTopicFilter) this.setState({topicFilter: passedTopicFilter});
 
         fetch(`${BASE_URL}/articles`)
         .then(response => response.json())
@@ -77,7 +78,7 @@ class ArticleList extends React.Component {
 
     render () {
         const {topics, authors} = this.state;
-        console.log(this.state.authorFilter);
+        const {topicFilter, authorFilter} = this.state;
         
         return (
             <div className="ArticleList section">
@@ -85,10 +86,11 @@ class ArticleList extends React.Component {
                     Display articles on <OrderDropDown
                         entries={topics}
                         onChange={({target:{value}}) => this.setState({topicFilter: value})}
+                        selected={topicFilter}
                     /> by <OrderDropDown
                         entries={authors}
                         onChange={this.changeAuthorFilter}
-                        selected={this.state.authorFilter}
+                        selected={authorFilter}
 
                     />
                 </div>
