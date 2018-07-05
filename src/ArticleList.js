@@ -5,7 +5,7 @@ import ArticlePreview from './ArticlePreview';
 import OrderDropDown from './OrderDropDown';
 
 const everyone = {value: '', text: 'Everyone'};
-const allTopics = {value: null, text: 'All Topics'};
+const allTopics = {value: '', text: 'All Topics'};
 
 class ArticleList extends React.Component {
 
@@ -19,9 +19,9 @@ class ArticleList extends React.Component {
 
     componentDidMount () {
         if (this.props.location.state) {
-            const passedAuthorFilter = this.props.location.state.authorFilter;
+            const passedAuthorFilter = this.props.location.state.authorFilter || '';
             if (passedAuthorFilter) this.setState({authorFilter: passedAuthorFilter});
-            const passedTopicFilter = this.props.location.state.topicFilter;
+            const passedTopicFilter = this.props.location.state.topicFilter || '';
             if (passedTopicFilter) this.setState({topicFilter: passedTopicFilter});
         }
 
@@ -53,14 +53,15 @@ class ArticleList extends React.Component {
 
     filteredArticles =  () => {
         const {authorFilter, articles} = this.state;
-        
+
         const filteredByAuthor = (authorFilter !== '')
             ? articles.filter(({created_by:{_id}}) => _id === authorFilter)
             : articles;
 
         const {topicFilter} = this.state;
 
-        const filteredByTopicAndAuthor = topicFilter !== ''
+        const filteredByTopicAndAuthor =
+        topicFilter !== ''
             ? filteredByAuthor.filter(({belongs_to:{_id}}) => _id === topicFilter)
             : filteredByAuthor
 
@@ -80,7 +81,7 @@ class ArticleList extends React.Component {
     render () {
         const {topics, authors} = this.state;
         const {topicFilter, authorFilter} = this.state;
-        
+
         return (
             <div className="ArticleList section">
                 <div>
@@ -92,7 +93,6 @@ class ArticleList extends React.Component {
                         entries={authors}
                         onChange={this.changeAuthorFilter}
                         selected={authorFilter}
-
                     />
                 </div>
                 <div className="columns is-multiline">
