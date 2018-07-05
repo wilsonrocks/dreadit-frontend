@@ -1,37 +1,18 @@
 import React from 'react';
 
 import ArticleList from './ArticleList';
+import NavBar from './Navbar';
 import Authors from './Authors';
 import Topics from './Topics';
 import Article from './Article';
 import NotFound from './NotFound';
 
-import {BrowserRouter, Route, Link, Switch, Redirect} from 'react-router-dom';
+import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 
 import "bulma/css/bulma.css";
-
-
-import logo from './assets/drawing.svg'
 import "./news.css";
 
 
-function NavBar () {
-  return (
-  <section>
-    <nav className="navbar">
-      <div className="navbar-brand logo-with-words">  
-        <Link to="/latest"> <img src={logo} alt="" className="logo"/></Link>
-        <Link to="/latest"><span className="title dreadit">DREADIT</span></Link>
-      </div>
-      <div className="level-item">
-        <Link to="/latest" className="navbar-item">Latest</Link>
-        <Link to="/hottest" className="navbar-item">Hottest</Link>
-        <Link to="/authors" className="navbar-item">Authors</Link>
-        <Link to="/topics" className="navbar-item">Topics</Link>
-      </div>
-    </nav>
-  </section>);
-}
 
 function App () {
     return (
