@@ -12,9 +12,8 @@ function NavBar () {
           <NavLink to="/articles" activeClassName="selected"><span className="title dreadit">DREADIT</span></NavLink>
         </div>
         <div className="level-item">
-          <NavLink to="/articles" activeClassName="selected" className="navbar-item">Articles</NavLink>
-          <NavLink to="/authors" activeClassName="selected" className="navbar-item">Authors</NavLink>
-          <NavLink to="/topics" activeClassName="selected" className="navbar-item">Topics</NavLink>
+          <NavLink to="/articles" activeClassName="selected" className="navbar-item">Read</NavLink>
+          <NavLink to="/new" activeClassName="selected" className="navbar-item">Write</NavLink>
         </div>
       </nav>
     </section>

@@ -2,8 +2,7 @@ import React from 'react';
 
 import ArticleList from './ArticleList';
 import NavBar from './Navbar';
-import Authors from './Authors';
-import Topics from './Topics';
+import NewArticle from './NewArticle';
 import Article from './Article';
 import NotFound from './NotFound';
 
@@ -19,8 +18,8 @@ function App () {
         <NavBar/>
         <Switch>
           <Redirect exact from="/" to="/articles`"/>
+
           <Route exact path="/articles" component={ArticleList}/>
-          <Route exact path="/authors" component={Authors}/>
 
           <Route path="/authors/:_id" render = {({match}) =>(
             <Redirect to={{
@@ -36,8 +35,10 @@ function App () {
             }}/>
           )} />
 
-          <Route path="/topics" component={Topics}/>
           <Route path="/articles/:_id" component={Article}/>
+
+          <Route exact path="/new" component={NewArticle}/>
+
           <Route component={NotFound}/>
         </Switch>
       </div>
