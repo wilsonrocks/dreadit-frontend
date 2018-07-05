@@ -36,10 +36,10 @@ class Article extends React.Component {
         .then(response => response.json())
         .then(({article}) => {
             const {_id, votes, title, body} = article;
-            const {name: authorName, avatar_url: avatarUrl} = article.created_by;
+            const {name: authorName, avatar_url: avatarUrl, _id: authorId} = article.created_by;
             const {title: topicName, _id: topicId} = article.belongs_to;
             this.setState({article:{
-                _id, votes, title, body, authorName, avatarUrl, topicName, topicId
+                _id, votes, title, body, authorName, avatarUrl, topicName, topicId, authorId
             }})
             
         })
