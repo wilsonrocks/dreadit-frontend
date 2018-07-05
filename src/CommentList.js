@@ -43,7 +43,6 @@ class CommentList extends React.Component {
           _id={_id}
           optimisticallyAddComment={optimisticallyAddComment}
           optimisticallyDeleteComment={optimisticallyDeleteComment}
-
         />
         <OrderDropDown className="level-item" onChange={this.changeOrder} entries={orders}/>
 

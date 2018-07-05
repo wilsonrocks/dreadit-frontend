@@ -5,11 +5,7 @@ import AuthorName from './AuthorName';
 import CommentList from './CommentList';
 import TopicName from './TopicName';
 
-import NotFound from './NotFound';
-import ServerError from './ServerError';
-
 import {BASE_URL} from './constants';
-import { getDetailsFromTopicId } from './helpers';
 
 class Article extends React.Component {
 
@@ -23,15 +19,13 @@ class Article extends React.Component {
             topicName: '',
             topicId: '',
             votes: 0,
-            commentCount: 0,
         },
         comments: [],
     }
 
     componentDidMount () {
         const {_id} = this.props.match.params;
-        console.dir(this.state)
-        
+
         fetch(`${BASE_URL}/articles/${_id}`)
         .then(response => response.json())
         .then(({article}) => {
@@ -41,9 +35,7 @@ class Article extends React.Component {
             this.setState({article:{
                 _id, votes, title, body, authorName, avatarUrl, topicName, topicId, authorId
             }})
-            
         })
-        .then(() => console.dir(this.state));
 
         fetch(`${BASE_URL}/articles/${_id}/comments`)
         .then(response => response.json())

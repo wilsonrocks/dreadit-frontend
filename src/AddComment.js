@@ -31,7 +31,10 @@ class AddComment extends React.Component{
             else throw new Error('problemSubmittingComment');
             return response.json()
         })
-        .then(({created}) => this.props.optimisticallyAddComment(created));
+        .then(({created}) => {
+            this.props.optimisticallyAddComment(created)
+            this.setState({body:''});
+        });
     }
 
     handleKeys = event => {
