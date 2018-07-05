@@ -18,11 +18,12 @@ class ArticleList extends React.Component {
     }
 
     componentDidMount () {
-
-        const passedAuthorFilter = this.props.location.state.authorFilter;
-        if (passedAuthorFilter) this.setState({authorFilter: passedAuthorFilter});
-        const passedTopicFilter = this.props.location.state.topicFilter;
-        if (passedTopicFilter) this.setState({topicFilter: passedTopicFilter});
+        if (this.props.location.state) {
+            const passedAuthorFilter = this.props.location.state.authorFilter;
+            if (passedAuthorFilter) this.setState({authorFilter: passedAuthorFilter});
+            const passedTopicFilter = this.props.location.state.topicFilter;
+            if (passedTopicFilter) this.setState({topicFilter: passedTopicFilter});
+        }
 
         fetch(`${BASE_URL}/articles`)
         .then(response => response.json())
