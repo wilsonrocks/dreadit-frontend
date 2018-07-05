@@ -1,5 +1,7 @@
 import React from 'react';
 
+import {Link} from 'react-router-dom';
+
 class Avatar extends React.Component {
 
     state = {
@@ -11,17 +13,19 @@ class Avatar extends React.Component {
     }
 
     render () {
-        const {avatar_url, name} = this.props;
+        const {avatar_url, name, _id} = this.props;
         const {wasError} = this.state;
         if (wasError) return null;
         else {
             return (
-                <figure className="image is-64x64 is-inline-block">
-                    <img
-                        src={avatar_url}
-                        alt={name}
-                        onError={this.handleError}/>
-                </figure>
+                <Link to={`/authors/${_id}`}>
+                    <figure className="image is-64x64 is-inline-block">
+                        <img
+                            src={avatar_url}
+                            alt={name}
+                            onError={this.handleError}/>
+                    </figure>
+                </Link>
             );
         }
     }
