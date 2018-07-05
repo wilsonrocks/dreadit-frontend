@@ -46,10 +46,31 @@ class ArticleList extends React.Component {
     }
 
 
-    filterAuthors = (authors, name) => {
+    filterAuthors = (name) => {
+
+        const {authorFilter, authors} = this.state;
+
         if (name === '') return authors;
-        return authors.filter(author => author.created_by._id === this.state.authorFilter);
+        return authors.filter(author => author.created_by._id === authorFilter);
     }
+
+    filteredArticles =  () => {
+        const {authorFilter, articles} = this.state;
+        
+        const filteredByAuthor = (authorFilter !== '')
+            ? articles.filter(({created_by:{_id}}) => _id === authorFilter)
+            : articles;
+
+        const {topicFilter} = this.state;
+
+        const filteredByTopicAndAuthor = topicFilter !== ''
+            ? filteredByAuthor.filter(({belongs_to:{_id}}) => _id === topicFilter)
+            : filteredByAuthor
+
+        return filteredByTopicAndAuthor;
+
+    }
+
 
     orderBy = () => {
         return this.props.match.url.slice(1);
@@ -60,21 +81,21 @@ class ArticleList extends React.Component {
     }
 
     render () {
-        const {articles, topics, authors} = this.state;
-        const filteredArticles = this.filterAuthors(articles, this.state.authorFilter);
+        const {topics, authors} = this.state;
         
         return (
             <div className="ArticleList section">
                 <div>
                     Display articles on <OrderDropDown
                         entries={topics}
+                        onChange={({target:{value}}) => this.setState({topicFilter: value})}
                     /> by <OrderDropDown
                         entries={authors}
                         onChange={this.changeAuthorFilter}
                     />
                 </div>
                 <div className="columns is-multiline">
-                    {filteredArticles.map(
+                    {this.filteredArticles().map(
                         article => {
                             return <ArticlePreview {...article} key={article._id}/>
                         }
