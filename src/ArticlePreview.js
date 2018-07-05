@@ -14,7 +14,7 @@ function ArticlePreview ({_id, title, votes, belongs_to, created_by:{avatar_url,
 
                 <div className="media-body">
                     <p>{belongs_to.title}</p>
-                    <Link to={`/article/${_id}`}>{title}</Link>
+                    <Link to={`/articles/${_id}`}>{title}</Link>
                 </div>
 
             </div>

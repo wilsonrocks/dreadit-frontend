@@ -8,12 +8,11 @@ function NavBar () {
     <section>
       <nav className="navbar">
         <div className="navbar-brand logo-with-words">  
-          <Link to="/latest"> <img src={logo} alt="" className="logo"/></Link>
-          <Link to="/latest"><span className="title dreadit">DREADIT</span></Link>
+          <Link to="/articles"> <img src={logo} alt="" className="logo"/></Link>
+          <Link to="/articles"><span className="title dreadit">DREADIT</span></Link>
         </div>
         <div className="level-item">
-          <Link to="/latest" className="navbar-item">Latest</Link>
-          <Link to="/hottest" className="navbar-item">Hottest</Link>
+          <Link to="/articles" className="navbar-item">Articles</Link>
           <Link to="/authors" className="navbar-item">Authors</Link>
           <Link to="/topics" className="navbar-item">Topics</Link>
         </div>

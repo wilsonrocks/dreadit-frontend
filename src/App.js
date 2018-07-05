@@ -12,21 +12,17 @@ import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 import "bulma/css/bulma.css";
 import "./news.css";
 
-
-
 function App () {
     return (
     <BrowserRouter>
       <div className="app">
         <NavBar/>
         <Switch>
-          <Redirect exact from="/" to="/latest"/>
-          <Route path="/latest" component={ArticleList}/>
-
-          <Route path="/hottest" component={ArticleList}/>
+          <Redirect exact from="/" to="/articles`"/>
+          <Route exact path="/articles" component={ArticleList}/>
           <Route path="/authors" component={Authors}/>
           <Route path="/topics" component={Topics}/>
-          <Route path="/article/:_id" component={Article}/>
+          <Route path="/articles/:_id" component={Article}/>
           <Route component={NotFound}/>
         </Switch>
       </div>
