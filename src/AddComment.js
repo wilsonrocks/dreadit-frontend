@@ -34,16 +34,21 @@ class AddComment extends React.Component{
         .then(({created}) => this.props.optimisticallyAddComment(created));
     }
 
+    handleKeys = event => {
+        if (event.key === 'Enter') this.submitComment();
+    }
+
     render () {
         if (this.state.active) return (
         <div>
-            <textarea
-                className="textarea"
+            <input
+                type="text"
+                className="input"
                 autoFocus
                 onChange={({target:{value}}) => this.setState({body:value})}
+                onKeyPress={this.handleKeys}
                 value={this.state.body}
             />
-
             <button
                 className="button"
                 onClick={this.submitComment}>
@@ -63,7 +68,7 @@ class AddComment extends React.Component{
         <button
             className="button"
             onClick={()=>this.setState({active:true})}>
-            <FontAwesomeIcon icon={faPlus}/> Add Comment
+            <FontAwesomeIcon icon={faPlus}/>
         </button>
 
         );

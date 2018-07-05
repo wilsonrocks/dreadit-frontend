@@ -74,7 +74,6 @@ class DisplayArticle extends React.Component {
     };
 
     optimisticallyAddComment = (comment) => {
-        console.dir(this.state);
 
         this.setState({comments:
             [...this.state.comments, comment]
