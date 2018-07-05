@@ -64,16 +64,18 @@ class Comment extends React.Component {
 
                 <div className="media-content">
                     {body}
-                    <Votes
-                        onChange={this.onChange}
-                        votes={votes}
-                        _id={_id}
-                    />
-                    <FontAwesomeIcon
-                        className="pointer"
-                        icon={faTrashAlt}
-                        onClick={() => this.deleteComment(_id)}
-                    />
+                    <div>
+                        <FontAwesomeIcon
+                            className="pointer"
+                            icon={faTrashAlt}
+                            onClick={() => this.deleteComment(_id)}
+                        />
+                        <Votes
+                            onChange={this.onChange}
+                            votes={votes}
+                            _id={_id}
+                        />
+                    </div>
 
                 </div>
             </div>

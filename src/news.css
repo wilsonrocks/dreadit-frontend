@@ -12,6 +12,9 @@
 
 .votes {
     font-size: large;
+    display: inline-block;
+    margin: 10px;
+    
 }
 
 .user {
