@@ -34,3 +34,7 @@
 .logo-with-words {
     margin: 1.5rem;
 }
+
+.selected {
+    font-weight: bold;
+}

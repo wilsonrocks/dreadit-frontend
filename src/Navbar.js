@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from './assets/drawing.svg'
-import {Link} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 
 
 function NavBar () {
@@ -8,13 +8,13 @@ function NavBar () {
     <section>
       <nav className="navbar">
         <div className="navbar-brand logo-with-words">  
-          <Link to="/articles"> <img src={logo} alt="" className="logo"/></Link>
-          <Link to="/articles"><span className="title dreadit">DREADIT</span></Link>
+          <NavLink to="/articles" activeClassName="selected"> <img src={logo} alt="" className="logo"/></NavLink>
+          <NavLink to="/articles" activeClassName="selected"><span className="title dreadit">DREADIT</span></NavLink>
         </div>
         <div className="level-item">
-          <Link to="/articles" className="navbar-item">Articles</Link>
-          <Link to="/authors" className="navbar-item">Authors</Link>
-          <Link to="/topics" className="navbar-item">Topics</Link>
+          <NavLink to="/articles" activeClassName="selected" className="navbar-item">Articles</NavLink>
+          <NavLink to="/authors" activeClassName="selected" className="navbar-item">Authors</NavLink>
+          <NavLink to="/topics" activeClassName="selected" className="navbar-item">Topics</NavLink>
         </div>
       </nav>
     </section>
