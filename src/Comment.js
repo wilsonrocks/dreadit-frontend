@@ -2,10 +2,15 @@ import React from 'react';
 import Votes from './Votes';
 import Avatar from './Avatar';
 import AuthorName from './AuthorName';
+import {BASE_URL} from './constants';
+
 import moment from 'moment';
 import {
     getDetailsFromUserId,
     submitCommentVote,} from './helpers';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 class Comment extends React.Component {
 
@@ -32,6 +37,15 @@ class Comment extends React.Component {
         }
     }
 
+    deleteComment = (_id) => {
+        fetch(`${BASE_URL}/comments/${_id}`, {
+            method:'DELETE'
+        })
+        .then(response=>response.json())
+        .then(this.props.optimisticallyDeleteComment(_id));
+
+    }
+
     render () {
         const {created_at, votes, body, _id, created_by} = this.props;
         const {avatar_url, name} = this.state;
@@ -55,6 +69,12 @@ class Comment extends React.Component {
                         votes={votes}
                         _id={_id}
                     />
+                    <FontAwesomeIcon
+                        className="pointer"
+                        icon={faTrashAlt}
+                        onClick={() => this.deleteComment(_id)}
+                    />
+
                 </div>
             </div>
         );

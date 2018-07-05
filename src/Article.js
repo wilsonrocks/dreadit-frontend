@@ -64,11 +64,15 @@ class Article extends React.Component {
     }
 
     optimisticallyAddComment = (comment) => {
-
         this.setState({comments:
             [...this.state.comments, comment]
         });
+    }
 
+    optimisticallyDeleteComment = (_id) => {
+        this.setState({comments:
+            this.state.comments.filter(comment => comment._id !== _id)
+        });
     }
 
     render () {
@@ -93,6 +97,7 @@ class Article extends React.Component {
                       changeVoting={this.changeVoting}
                       _id={_id}
                       optimisticallyAddComment={this.optimisticallyAddComment}
+                      optimisticallyDeleteComment={this.optimisticallyDeleteComment}
                       />
             </div>
         );

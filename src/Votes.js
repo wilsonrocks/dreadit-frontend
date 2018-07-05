@@ -65,7 +65,7 @@ class Votes extends React.Component {
                 <div>
                 <span className="icon">
                     <FontAwesomeIcon
-                        className={`thumb ${this.state.vote === 'up' ? 'yes-vote': null}`}
+                        className={`pointer ${this.state.vote === 'up' ? 'yes-vote': null}`}
                         icon={faThumbsUp}
                         onClick={this.voteUp}
                     />
@@ -75,7 +75,7 @@ class Votes extends React.Component {
 
                 <span className="icon">
                     <FontAwesomeIcon
-                        className={`thumb ${this.state.vote === 'down' ? 'no-vote': null}`}
+                        className={`pointer ${this.state.vote === 'down' ? 'no-vote': null}`}
                         icon={faThumbsDown}
                         onClick={this.voteDown}
                     />

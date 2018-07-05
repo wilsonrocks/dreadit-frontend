@@ -27,8 +27,11 @@ class CommentList extends React.Component {
     this.setState({orderBy:value});
   };
 
+
+
   render () {
-    const {comments, changeVoting, _id, optimisticallyAddComment} = this.props;
+    const {comments, changeVoting, _id, optimisticallyAddComment,
+      optimisticallyDeleteComment} = this.props;
     const sortedComments = sortItems(comments, this.state.orderBy);
 
     return (
@@ -39,6 +42,8 @@ class CommentList extends React.Component {
         <AddComment
           _id={_id}
           optimisticallyAddComment={optimisticallyAddComment}
+          optimisticallyDeleteComment={optimisticallyDeleteComment}
+
         />
         <OrderDropDown className="level-item" onChange={this.changeOrder} entries={orders}/>
 
@@ -50,6 +55,7 @@ class CommentList extends React.Component {
             changeVoting = {changeVoting}
             articleId = {_id}
             key={comment._id}
+            optimisticallyDeleteComment={optimisticallyDeleteComment}
           />
         })}
       </div>
