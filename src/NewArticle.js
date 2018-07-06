@@ -31,7 +31,14 @@ class NewArticle extends React.Component {
         <label className="label">
           Writing as
         </label>
-          <select className="select">
+          <select
+            className="select"
+            value={this.state.writingAs}
+            onChange={({target:{value}})=>this.setState({writingAs:value})}
+          >
+
+            <option default disabled value='' >Choose Author</option>
+
             {authors.map(({_id, name}) => (
               <option
                 value={_id}
@@ -40,18 +47,27 @@ class NewArticle extends React.Component {
                 {name}
               </option>
             ))}
+
           </select>
         </div>
 
         <div className="field">
+          
           <label className="label">
             Topic
           </label>
-          <select className="select">
+          
+          <select
+            className="select"
+            onChange={({target:{value}})=>this.setState({topic:value})}
+            value={this.state.topic}
+          >
+            <option value="" disabled>Choose topic</option>
             {availableTopics.map(({_id, title}) => (
               <option
                 value={_id}
                 key={_id}
+
               >
                 {title}
               </option>
