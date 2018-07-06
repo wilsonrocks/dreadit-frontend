@@ -7,7 +7,7 @@ import {BASE_URL} from './constants';
 import moment from 'moment';
 import {
     getDetailsFromUserId,
-    submitCommentVote,} from './helpers';
+    submitCommentVote,} from './api';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';

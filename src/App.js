@@ -4,7 +4,7 @@ import ArticleList from './ArticleList';
 import NavBar from './Navbar';
 import NewArticle from './NewArticle';
 import Article from './Article';
-import NotFound from './NotFound';
+import {NotFound} from './Error';
 
 import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 
