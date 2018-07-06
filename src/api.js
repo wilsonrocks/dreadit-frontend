@@ -1,13 +1,17 @@
 import {BASE_URL} from './constants';
 
+const throwStatusOnError = response => {
+  if (response.ok) return response.json();
+  else throw new Error(response.status);
+}
+
+const returnStatusCode = ({message: status}) => ({status});
+
 export function getArticleFromId (_id) {
-  
+
   return fetch(`${BASE_URL}/articles/${_id}`)
 
-  .then(response => {
-    if (response.ok) return response.json();
-    else throw new Error(response.status);
-  })
+  .then(throwStatusOnError)
 
   .then(({article}) => {
     const {_id, votes, title, body} = article;
@@ -18,15 +22,20 @@ export function getArticleFromId (_id) {
     }}
   })
 
-  .catch(({message: status}) => {
-    return {status}
-  });
-  
+  .catch(returnStatusCode);
+
 }
+
+export function getCommentsFromArticleID (_id) {
+  return fetch(`${BASE_URL}/articles/${_id}/comments`)
+    .then(throwStatusOnError)
+    .catch(returnStatusCode);
+}
+
 
 export function getDetailsFromUserId (userId) {
   if (localStorage[userId]) return Promise.resolve(JSON.parse(localStorage[userId]));
-  
+
   else {
     return fetch(`${BASE_URL}/users/${userId}`)
     .then(response => response.json())
@@ -39,7 +48,7 @@ export function getDetailsFromUserId (userId) {
 
 export function getDetailsFromTopicId (topicId) {
   if (localStorage[topicId]) return Promise.resolve(JSON.parse(localStorage[topicId]));
-  
+
   else {
     return fetch(`${BASE_URL}/topics`)
     .then(response => response.json())
