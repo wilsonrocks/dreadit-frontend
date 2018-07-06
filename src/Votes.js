@@ -9,12 +9,12 @@ import { faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 class Votes extends React.Component {
 
     state = {
-        vote: 'null',
+        vote: '',
     }
 
     componentDidMount () {
         this.setState({
-            vote: window.localStorage[this.props._id] || null,
+            vote: window.localStorage[this.props._id] || '',
         });
     }
 
@@ -27,7 +27,7 @@ class Votes extends React.Component {
         const {_id, onChange} = this.props;
         
         if (vote === 'up') {
-            this.setState({vote: null});
+            this.setState({vote: ''});
             window.localStorage.removeItem(_id);
             onChange(-1);
         }
@@ -44,7 +44,7 @@ class Votes extends React.Component {
         const {_id, onChange} = this.props;
 
         if (vote === 'down') {
-            this.setState({vote: null});
+            this.setState({vote: ''});
             window.localStorage.removeItem(_id);
             onChange(1)
         }
@@ -65,7 +65,7 @@ class Votes extends React.Component {
                 <div>
                 <span className="icon">
                     <FontAwesomeIcon
-                        className={`pointer ${this.state.vote === 'up' ? 'yes-vote': null}`}
+                        className={`pointer ${this.state.vote === 'up' ? 'yes-vote': ''}`}
                         icon={faThumbsUp}
                         onClick={this.voteUp}
                     />
@@ -75,7 +75,7 @@ class Votes extends React.Component {
 
                 <span className="icon">
                     <FontAwesomeIcon
-                        className={`pointer ${this.state.vote === 'down' ? 'no-vote': null}`}
+                        className={`pointer ${this.state.vote === 'down' ? 'no-vote': ''}`}
                         icon={faThumbsDown}
                         onClick={this.voteDown}
                     />

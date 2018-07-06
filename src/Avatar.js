@@ -8,7 +8,7 @@ class Avatar extends React.Component {
         wasError:false,
     }
 
-    handleError = () => {
+    handleError = (err) => {
         this.setState({wasError: true});
     }
 

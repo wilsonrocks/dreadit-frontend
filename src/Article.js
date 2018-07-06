@@ -80,7 +80,11 @@ class Article extends React.Component {
                 />
                 <h1 className="title">{title}</h1>
                  <h2 className="subtitle">
-                     <Avatar avatar_url={avatarUrl}/>
+                     <Avatar
+                        avatar_url={avatarUrl}
+                        name={authorName}
+                        _id={authorId}
+                    />
                      <AuthorName name={authorName} _id={authorId}/>
                  </h2>
                   <p>{body}</p>

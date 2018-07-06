@@ -17,7 +17,7 @@ function App () {
       <div className="app">
         <NavBar/>
         <Switch>
-          <Redirect exact from="/" to="/articles`"/>
+          <Redirect exact from="/" to="/articles"/>
 
           <Route exact path="/articles" component={ArticleList}/>
 

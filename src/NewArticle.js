@@ -22,6 +22,23 @@ class NewArticle extends React.Component {
     .then(({topics}) => this.setState({availableTopics: topics}))
   }
 
+  submitArticle = (event) => {
+    event.preventDefault();
+    const {title, body, topic} = this.state;
+    const options = {
+      method: 'POST',
+      body:JSON.stringify({
+        body,
+        title}),
+      headers: {
+        'content-type': 'application/json'
+      }
+    };
+    fetch(`${BASE_URL}/topics/${topic}/articles`, options)
+    .then(response=>response.json())
+    .then(({created: {_id}}) => {this.props.history.push(`/articles/${_id}`)});
+  }
+
   render () {
     const {body, authors, availableTopics} = this.state;
     return (
@@ -62,7 +79,7 @@ class NewArticle extends React.Component {
             onChange={({target:{value}})=>this.setState({topic:value})}
             value={this.state.topic}
           >
-            <option value="" disabled>Choose topic</option>
+            <option value="" disabled>Choose Topic</option>
             {availableTopics.map(({_id, title}) => (
               <option
                 value={_id}
@@ -103,7 +120,10 @@ class NewArticle extends React.Component {
         </div>
             
         <div className="control">
-          <button className="button">
+          <button
+            className="button"
+            onClick={this.submitArticle}
+          >
             Submit Article
           </button>
         </div>
