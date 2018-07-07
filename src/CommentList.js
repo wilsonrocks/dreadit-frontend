@@ -35,18 +35,21 @@ class CommentList extends React.Component {
     const sortedComments = sortItems(comments, this.state.orderBy);
 
     return (
-      <div className="comment-list section">
-        <div>
-
-        <span className="is-size-5">Comments</span>
+      <div className="comment-list">
+        
+        <form>
+          <div className="field is-horizontal">
+            <span className="is-size-5 field-label">Comments</span>
+            <OrderDropDown className="level-item field-body" onChange={this.changeOrder} entries={orders}/>
+          </div>
+        </form>
+        
         <AddComment
           _id={_id}
           optimisticallyAddComment={optimisticallyAddComment}
           optimisticallyDeleteComment={optimisticallyDeleteComment}
         />
-        <OrderDropDown className="level-item" onChange={this.changeOrder} entries={orders}/>
 
-        </div>
 
         {sortedComments.map(comment => {
           return <Comment
