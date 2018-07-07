@@ -23,6 +23,7 @@ class Article extends React.Component {
     },
     comments: [],
     status: 200,
+    commentError: false,
   }
 
   componentDidMount () {
@@ -32,7 +33,10 @@ class Article extends React.Component {
     .then(newState => this.setState(newState));
 
     getCommentsFromArticleID(_id)
-    .then(newState => this.setState(newState));
+    .then(newState => {
+      if (newState.status !== undefined) this.setState({commentError: true});
+      else this.setState(newState);
+    });
 
   }
 
@@ -62,7 +66,7 @@ class Article extends React.Component {
   }
 
   render () {
-    const {status} = this.state;
+    const {status, commentError} = this.state;
     if (status !== 200) return <Error status={status}/>;
 
     const {topicName, topicId, title, avatarUrl, authorName,
@@ -85,6 +89,11 @@ class Article extends React.Component {
           <AuthorName name={authorName} _id={authorId}/>
           </h2>
           <p>{body}</p>
+
+          {commentError
+          ?
+          <p> Problem retrieving Comments </p>
+          :
           <CommentList
             comments={comments}
             changeVoting={this.changeVoting}
@@ -92,6 +101,9 @@ class Article extends React.Component {
             optimisticallyAddComment={this.optimisticallyAddComment}
             optimisticallyDeleteComment={this.optimisticallyDeleteComment}
           />
+          }
+
+
         </div>
       );
     }

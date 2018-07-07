@@ -27,8 +27,6 @@ class CommentList extends React.Component {
     this.setState({orderBy:value});
   };
 
-
-
   render () {
     const {comments, changeVoting, _id, optimisticallyAddComment,
       optimisticallyDeleteComment} = this.props;
@@ -49,7 +47,6 @@ class CommentList extends React.Component {
           optimisticallyAddComment={optimisticallyAddComment}
           optimisticallyDeleteComment={optimisticallyDeleteComment}
         />
-
 
         {sortedComments.map(comment => {
           return <Comment

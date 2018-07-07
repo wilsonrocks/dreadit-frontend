@@ -4,16 +4,17 @@ import {BASE_URL} from './constants';
 
 
 class AddComment extends React.Component{
-  
+
   state = {
     active: false,
     body: '',
   }
-  
-  submitComment = () => {
+
+  submitComment = (event) => {
+    event.preventDefault();
     const {_id} = this.props;
     const {body} = this.state;
-    
+
     fetch(`${BASE_URL}/articles/${_id}/comments`,
     {
       method: 'POST',
@@ -34,13 +35,14 @@ class AddComment extends React.Component{
       this.setState({body:''});
     });
   }
-  
+
   handleKeys = event => {
     if (event.key === 'Enter') this.submitComment();
   }
-  
+
   render () {
-    if (this.state.active) return (
+    const {body, active} = this.state;
+    if (active) return (
       <form>
         <input
           type="text"
@@ -48,36 +50,41 @@ class AddComment extends React.Component{
           autoFocus
           onChange={({target:{value}}) => this.setState({body:value})}
           onKeyPress={this.handleKeys}
-          value={this.state.body}
+          value={body}
         />
       <div className="field is-grouped">
         <button
+          type="button"
           className="button control"
           onClick={this.submitComment}
+          disabled={!body}
         >
           Submit Comment
         </button>
+
         <button
+          type="button"
           className="button control"
           onClick={()=>this.setState({active:false, body:''})}
         >
           Cancel
         </button>
       </div>
-      
+
       </form>
     );
-    
+
     else return (
-      
+
       <button
-      className="button control"
-      onClick={()=>this.setState({active:true})}>
-      {/* <FontAwesomeIcon icon={faPlus}/> */} New Comment
+        className="button control"
+        onClick={()=>this.setState({active:true})}
+      >
+        New Comment
       </button>
-      
+
     );
-    
+
   }
 }
 
