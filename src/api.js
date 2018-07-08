@@ -48,6 +48,14 @@ export function getDetailsFromUserId (userId) {
   }
 }
 
+export function deleteCommentWithId (commentId) {
+  return fetch(`${BASE_URL}/comments/${commentId}/`, {
+      method:'DELETE'
+  })
+  .then(throwStatusOnError)
+  .catch(returnStatusCode);
+}
+
 export function getDetailsFromTopicId (topicId) {
   if (localStorage[topicId]) return Promise.resolve(JSON.parse(localStorage[topicId]));
 

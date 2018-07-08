@@ -2,12 +2,12 @@ import React from 'react';
 import Votes from './Votes';
 import Avatar from './Avatar';
 import AuthorName from './AuthorName';
-import {BASE_URL} from './constants';
 
 import moment from 'moment';
 import {
     getDetailsFromUserId,
-    submitCommentVote,} from './api';
+    submitCommentVote,
+    deleteCommentWithId} from './api';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
@@ -38,12 +38,10 @@ class Comment extends React.Component {
     }
 
     deleteComment = (_id) => {
-        fetch(`${BASE_URL}/comments/${_id}`, {
-            method:'DELETE'
-        })
-        .then(response=>response.json())
-        .then(this.props.optimisticallyDeleteComment(_id));
-
+        deleteCommentWithId(_id)
+        .then(response => {
+            if (response.status === undefined) this.props.optimisticallyDeleteComment(_id);
+        });
     }
 
     render () {
@@ -53,7 +51,7 @@ class Comment extends React.Component {
             <div className="media">
 
                 <div className="user media-left has-text-centered">
-                    <Avatar 
+                    <Avatar
                     avatar_url={avatar_url}
                     name={name}
                     _id={created_by}
