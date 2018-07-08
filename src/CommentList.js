@@ -39,6 +39,15 @@ class CommentList extends React.Component {
 
   render () {
 
+    const {status} = this.state;
+
+    if (status !== 200) return (
+      <div>
+        <p className="is-size-5">Comments</p>
+        <p className="has-text-danger"> Problem retrieving comments </p>
+      </div>
+    );
+
     const {changeVoting, _id, optimisticallyAddComment,
       optimisticallyDeleteComment} = this.props;
     const {comments} = this.state

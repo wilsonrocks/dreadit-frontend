@@ -22,7 +22,6 @@ class Article extends React.Component {
       votes: 0,
     },
     status: 200,
-    commentError: false,
   }
 
   componentDidMount () {
@@ -58,7 +57,7 @@ class Article extends React.Component {
   }
 
   render () {
-    const {status, commentError} = this.state;
+    const {status} = this.state;
 
     if (status !== 200) return <Error status={status}/>;
 
@@ -84,19 +83,12 @@ class Article extends React.Component {
           </h2>
           <p>{body}</p>
 
-          {commentError
-          ?
-          <p> Problem retrieving Comments </p>
-          :
           <CommentList
             changeVoting={this.changeVoting}
             _id={_id}
             optimisticallyAddComment={this.optimisticallyAddComment}
             optimisticallyDeleteComment={this.optimisticallyDeleteComment}
           />
-          }
-
-
         </div>
       );
     }
