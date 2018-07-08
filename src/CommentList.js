@@ -55,12 +55,11 @@ class CommentList extends React.Component {
 
     return (
       <div className="comment-list">
+        <p className="subtitle">Comments</p>
         
+
         <form>
-          <div className="field is-horizontal">
-            <span className="is-size-5 field-label">Comments</span>
-            <OrderDropDown className="level-item field-body" onChange={this.changeOrder} entries={orders}/>
-          </div>
+            <OrderDropDown onChange={this.changeOrder} entries={orders}/>
         </form>
         
         <AddComment
@@ -68,6 +67,7 @@ class CommentList extends React.Component {
           optimisticallyAddComment={optimisticallyAddComment}
           optimisticallyDeleteComment={optimisticallyDeleteComment}
         />
+
 
         {sortedComments.map(comment => {
           return <Comment

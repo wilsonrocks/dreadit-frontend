@@ -66,6 +66,7 @@ class Article extends React.Component {
     const {_id} = this.props.match.params;
 
       return (
+      <div>
         <div className="article section">
           <TopicName
             className="is-size-3"
@@ -83,6 +84,10 @@ class Article extends React.Component {
           </h2>
           <p>{body}</p>
 
+          </div>
+        <div className="section">
+        
+
           <CommentList
             changeVoting={this.changeVoting}
             _id={_id}
@@ -90,6 +95,7 @@ class Article extends React.Component {
             optimisticallyDeleteComment={this.optimisticallyDeleteComment}
           />
         </div>
+      </div>
       );
     }
 
