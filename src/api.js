@@ -29,7 +29,7 @@ export function getArticleFromId (_id) {
 export function getCommentsFromArticleID (_id) {
   return fetch(`${BASE_URL}/articles/${_id}/comments`)
     .then(throwStatusOnError)
-    .catch(returnStatusCode);
+    .catch(returnStatusCode)
 }
 
 

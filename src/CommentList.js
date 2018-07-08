@@ -2,6 +2,7 @@ import React from 'react';
 import Comment from './Comment'
 import AddComment from './AddComment';
 import OrderDropDown from './OrderDropDown';
+import {getCommentsFromArticleID} from './api';
 
 const orders = [
   {value: 'time', text:'Newest'},
@@ -19,8 +20,17 @@ class CommentList extends React.Component {
 
   state = {
     orderBy: 'created_at',
-    refresh: false
+    refresh: false,
+    comments: [],
+    status: 200
   };
+
+  componentDidMount () {
+    const {_id} = this.props;
+
+    getCommentsFromArticleID(_id)
+    .then(newState => this.setState(newState));
+  }
 
   changeOrder = ({target:{value}}) => {
     value = (value === 'time') ? 'created_at' : value;
@@ -28,8 +38,10 @@ class CommentList extends React.Component {
   };
 
   render () {
-    const {comments, changeVoting, _id, optimisticallyAddComment,
+
+    const {changeVoting, _id, optimisticallyAddComment,
       optimisticallyDeleteComment} = this.props;
+    const {comments} = this.state
     const sortedComments = sortItems(comments, this.state.orderBy);
 
     return (

@@ -6,7 +6,7 @@ import CommentList from './CommentList';
 import TopicName from './TopicName';
 import Error from './Error';
 
-import {getArticleFromId, getCommentsFromArticleID} from './api';
+import {getArticleFromId} from './api';
 
 class Article extends React.Component {
 
@@ -21,7 +21,6 @@ class Article extends React.Component {
       topicId: '',
       votes: 0,
     },
-    comments: [],
     status: 200,
     commentError: false,
   }
@@ -31,13 +30,6 @@ class Article extends React.Component {
 
     getArticleFromId(_id)
     .then(newState => this.setState(newState));
-
-    getCommentsFromArticleID(_id)
-    .then(newState => {
-      if (newState.status !== undefined) this.setState({commentError: true});
-      else this.setState(newState);
-    });
-
   }
 
 
@@ -67,11 +59,13 @@ class Article extends React.Component {
 
   render () {
     const {status, commentError} = this.state;
+
     if (status !== 200) return <Error status={status}/>;
 
     const {topicName, topicId, title, avatarUrl, authorName,
-      authorId, body, _id} = this.state.article;
-      const {comments} = this.state;
+      authorId, body} = this.state.article;
+    const {_id} = this.props.match.params;
+
       return (
         <div className="article section">
           <TopicName
@@ -95,7 +89,6 @@ class Article extends React.Component {
           <p> Problem retrieving Comments </p>
           :
           <CommentList
-            comments={comments}
             changeVoting={this.changeVoting}
             _id={_id}
             optimisticallyAddComment={this.optimisticallyAddComment}
