@@ -19,40 +19,25 @@ class Votes extends React.Component {
         return {up:1, down:-1}[this.state.vote] || 0;
     }
 
-    voteUp = () => {
+    vote = (direction) => {
+
         const {vote} = this.state;
         const {_id, onChange} = this.props;
 
-        if (vote === 'up') {
+        const newDelta = {up:1, down:-1}[direction];
+        const oldDelta = this.currentVoteDelta();
+
+        if (vote === direction) {
             this.setState({vote: ''});
             window.localStorage.removeItem(_id);
-            onChange(-1);
-        }
-        else {
-            const priorVotes =  this.currentVoteDelta();
-            this.setState({vote: 'up'});
-            window.localStorage[_id] = 'up';
-            onChange(1 - priorVotes);
-        }
-    }
-
-    voteDown = () => {
-        const {vote} = this.state;
-        const {_id, onChange} = this.props;
-
-        if (vote === 'down') {
-            this.setState({vote: ''});
-            window.localStorage.removeItem(_id);
-            onChange(1)
+            onChange(-newDelta);
         }
 
         else {
-            const priorVotes =  this.currentVoteDelta();
-            this.setState({vote: 'down'});
-            window.localStorage[_id] = 'down';
-            onChange(-1 - priorVotes);
+            this.setState({vote: direction});
+            window.localStorage.setItem(_id, direction);
+            onChange(newDelta - oldDelta);
         }
-
     }
 
     render () {
@@ -64,7 +49,7 @@ class Votes extends React.Component {
                     <FontAwesomeIcon
                         className={`pointer ${this.state.vote === 'up' ? 'yes-vote': ''}`}
                         icon={faThumbsUp}
-                        onClick={this.voteUp}
+                        onClick={() => this.vote('up')}
                     />
                 </span>
 
@@ -74,7 +59,7 @@ class Votes extends React.Component {
                     <FontAwesomeIcon
                         className={`pointer ${this.state.vote === 'down' ? 'no-vote': ''}`}
                         icon={faThumbsDown}
-                        onClick={this.voteDown}
+                        onClick={() => this.vote('down')}
                     />
                 </span>
 
@@ -83,7 +68,5 @@ class Votes extends React.Component {
         );
     }
 }
-
-
 
 export default Votes;
