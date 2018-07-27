@@ -1,10 +1,7 @@
 import React from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
-import { faThumbsDown } from '@fortawesome/free-solid-svg-icons';
-
-
+import { faThumbsUp, faThumbsDown} from '@fortawesome/free-solid-svg-icons';
 
 class Votes extends React.Component {
 
@@ -25,7 +22,7 @@ class Votes extends React.Component {
     voteUp = () => {
         const {vote} = this.state;
         const {_id, onChange} = this.props;
-        
+
         if (vote === 'up') {
             this.setState({vote: ''});
             window.localStorage.removeItem(_id);
