@@ -12,6 +12,11 @@ class NewArticle extends React.Component {
     availableTopics: [],
   }
 
+  readyToSubmit = () => {
+    const {title, body, topic, writingAs} = this.state;
+    return title.length > 0 && body.length > 0 && topic !== '' && writingAs !== '';
+  }
+
   componentDidMount () {
     fetch(`${BASE_URL}/users`)
     .then(response => response.json())
@@ -123,6 +128,7 @@ class NewArticle extends React.Component {
           <button
             className="button"
             onClick={this.submitArticle}
+            disabled={!this.readyToSubmit()}
           >
             Submit Article
           </button>
