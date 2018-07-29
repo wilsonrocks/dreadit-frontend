@@ -31,10 +31,6 @@ class Article extends React.Component {
     .then(newState => this.setState(newState));
   }
 
-
-  
-
-
   render () {
     const {status} = this.state;
 
@@ -45,35 +41,39 @@ class Article extends React.Component {
     const {_id} = this.props.match.params;
 
       return (
-      <div>
-        <div className="article section">
-          <TopicName
-            className="is-size-3"
-            name={topicName}
-            _id={topicId}
-          />
-          <h1 className="title">{title}</h1>
-          <h2 className="subtitle">
-          <Avatar
-            avatar_url={avatarUrl}
-            name={authorName}
-            _id={authorId}
-          />
-          <AuthorName name={authorName} _id={authorId}/>
-          </h2>
-          <p>{body}</p>
+        <div>
+          <div className="article section">
+            <TopicName
+              className="is-size-3"
+              name={topicName}
+              _id={topicId}
+            />
+            <h1 className="title">{title}</h1>
+            <h2 className="subtitle">
+              <Avatar
+                avatar_url={avatarUrl}
+                name={authorName}
+                _id={authorId}
+              />
+              <AuthorName
+                name={authorName}
+                _id={authorId}
+              />
+            </h2>
+
+            <p>{body}</p>
 
           </div>
-        <div className="section">
 
+          <div className="section">
 
-          <CommentList
-            changeVoting={this.changeVoting}
-            _id={_id}
-            optimisticallyAddComment={this.optimisticallyAddComment}
-          />
+            <CommentList
+              changeVoting={this.changeVoting}
+              _id={_id}
+            />
+            
+          </div>
         </div>
-      </div>
       );
     }
 
