@@ -31,7 +31,7 @@ class AddComment extends React.Component{
       return response.json()
     })
     .then(({created}) => {
-      this.props.optimisticallyAddComment(created)
+      this.props.addCommentToState(created)
       this.setState({body:''});
     });
   }

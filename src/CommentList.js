@@ -36,13 +36,13 @@ class CommentList extends React.Component {
     this.setState({orderBy:value});
   };
 
-  optimisticallyDeleteComment = (_id) => {
+  deleteCommentFromState = (_id) => {
     this.setState({comments:
       this.state.comments.filter(comment => comment._id !== _id)
     });
   }
 
-  optimisticallyAddComment = (comment) => {
+  addCommentToState = (comment) => {
     this.setState({comments:
       [...this.state.comments, comment]
     });
@@ -85,7 +85,7 @@ class CommentList extends React.Component {
 
         <AddComment
           _id={_id}
-          optimisticallyAddComment={this.optimisticallyAddComment}
+          addCommentToState={this.addCommentToState}
         />
 
         {sortedComments.map(comment => {
@@ -94,7 +94,7 @@ class CommentList extends React.Component {
             changeVoting = {this.changeVoting}
             articleId = {_id}
             key={comment._id}
-            optimisticallyDeleteComment={this.optimisticallyDeleteComment}
+            deleteCommentFromState={this.deleteCommentFromState}
           />
         })}
       </div>
