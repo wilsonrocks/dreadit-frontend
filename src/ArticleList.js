@@ -18,36 +18,45 @@ class ArticleList extends React.Component {
     }
 
     componentDidMount () {
-        if (this.props.location.state) {
-            const passedAuthorFilter = this.props.location.state.authorFilter || '';
-            if (passedAuthorFilter) this.setState({authorFilter: passedAuthorFilter});
-            const passedTopicFilter = this.props.location.state.topicFilter || '';
-            if (passedTopicFilter) this.setState({topicFilter: passedTopicFilter});
-        }
 
-        fetch(`${BASE_URL}/articles`)
-        .then(response => response.json())
-        .then(({articles}) => {
-            this.setState({articles})
-        });
 
-        fetch(`${BASE_URL}/topics`)
-        .then(response=>response.json())
-        .then(({topics})=>{
+        Promise.all([
+
+            fetch(`${BASE_URL}/articles`)
+            .then(response => response.json()),
+
+            fetch(`${BASE_URL}/topics`)
+            .then(response=>response.json()),
+
+            fetch(`${BASE_URL}/users`)
+            .then(response=>response.json())
+
+        ])
+        .then(([{articles}, {topics}, {users}]) => {
+
+            const newState = {};
+
+            if (this.props.location.state) {
+                const passedAuthorFilter = this.props.location.state.authorFilter || '';
+                if (passedAuthorFilter) newState.authorFilter = passedAuthorFilter;
+                const passedTopicFilter = this.props.location.state.topicFilter || '';
+                if (passedTopicFilter) newState.topicFilter = passedTopicFilter;
+            }
+
+            newState.articles = articles;
+
             const newTopics = topics.map(
                 ({title, _id}) => ({value: _id, text: title})
             )
-            this.setState({topics:[allTopics, ...newTopics]});
-        });
+            newState.topics = [allTopics, ...newTopics];
 
-        fetch(`${BASE_URL}/users`)
-        .then(response=>response.json())
-        .then(({users})=>{
             const newUsers = users.map(
                 ({name, _id}) => ({value: _id, text: name})
             )
-            this.setState({authors: [everyone, ...newUsers]});
+            newState.authors = [everyone, ...newUsers];
+            this.setState(newState);
         });
+
     }
 
 
@@ -79,8 +88,7 @@ class ArticleList extends React.Component {
     }
 
     render () {
-        const {topics, authors} = this.state;
-        const {topicFilter, authorFilter} = this.state;
+        const {topics, authors, topicFilter, authorFilter} = this.state;
 
         return (
             <div className="ArticleList section">
