@@ -40,7 +40,7 @@ class Comment extends React.Component {
     deleteComment = (_id) => {
         deleteCommentWithId(_id)
         .then(response => {
-            if (response.status === undefined) this.props.deleteCommentFromState(_id);
+            if (response.deleted) this.props.deleteCommentFromState(_id);
         });
     }
 
