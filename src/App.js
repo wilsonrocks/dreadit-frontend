@@ -1,9 +1,10 @@
 import React from 'react';
 
-import ArticleList from './ArticleList';
+import AllArticles from './AllArticles';
+import Article from './Article';
+import Topic from './Topic';
 import NavBar from './Navbar';
 import NewArticle from './NewArticle';
-import Article from './Article';
 import {NotFound} from './Error';
 
 import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
@@ -17,26 +18,13 @@ function App () {
       <div className="app">
         <NavBar/>
         <Switch>
+
           <Redirect exact from="/" to="/articles"/>
 
-          <Route exact path="/articles" component={ArticleList}/>
-
-          <Route path="/authors/:_id" render = {({match}) =>(
-            <Redirect to={{
-              pathname: '/articles',
-              state: {authorFilter: match.params._id}
-            }}/>
-          )} />
-
-          <Route path="/topics/:_id" render = {({match}) =>(
-            <Redirect to={{
-              pathname: '/articles',
-              state: {topicFilter: match.params._id}
-            }}/>
-          )} />
-
+          <Route exact path="/articles" component={AllArticles}/>
           <Route path="/articles/:_id" component={Article}/>
-
+          <Route path="/topics/:_id" component={Topic}/>
+          {/* <Route path="/authors/:_id" component={ArticleList}/> */}
           <Route exact path="/new" component={NewArticle}/>
 
           <Route component={NotFound}/>

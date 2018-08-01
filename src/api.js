@@ -34,7 +34,6 @@ export function getCommentsFromArticleID (_id) {
 
 }
 
-
 export function getDetailsFromUserId (userId) {
   if (localStorage[userId]) return Promise.resolve(JSON.parse(localStorage[userId]));
 
@@ -72,4 +71,11 @@ export function getDetailsFromTopicId (topicId) {
 
 export function submitCommentVote (_id, vote) {
   return fetch(`${BASE_URL}/comments/${_id}?vote=${vote}`, {method: 'PUT'})
+}
+
+export function getArticlesForTopic (_id) {
+  return fetch(`${BASE_URL}/topics/${_id}/articles`)
+  .then(throwStatusOnError)
+  .catch(returnStatusCode);
+
 }
