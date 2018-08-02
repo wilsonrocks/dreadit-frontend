@@ -29,12 +29,14 @@ class NewArticle extends React.Component {
 
   submitArticle = (event) => {
     event.preventDefault();
-    const {title, body, topic} = this.state;
+    const {title, body, topic, writingAs} = this.state;
     const options = {
       method: 'POST',
       body:JSON.stringify({
         body,
-        title}),
+        title,
+        created_by: writingAs,
+      }),
       headers: {
         'content-type': 'application/json'
       }
