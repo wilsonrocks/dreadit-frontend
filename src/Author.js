@@ -10,6 +10,7 @@ class Author extends React.Component {
 
   state = {
     articles: [],
+    loading: true,
   }
 
   componentDidMount () {
@@ -17,13 +18,21 @@ class Author extends React.Component {
 
     getArticlesForAuthor(_id)
     .then(response => {
-      if (response.articles) this.setState({articles: response.articles});
+      if (response.articles) this.setState({
+        articles: response.articles,
+        loading: false,
+      });
     });
   }
 
   render = () => {
-    const {articles} = this.state;
+    const {
+      articles,
+      loading,
+    } = this.state;
     const {_id} = this.props.match.params;
+
+    if (loading) return <div/>;
 
     return articles.length > 0
     ? <ArticleList articles={articles}/>
