@@ -31,6 +31,14 @@ export function TopicError ({_id}) {
   </div>);
 }
 
+export function AuthorError ({_id}) {
+  return (
+  <div className="section">
+    We don't appear to have any articles for the author with ID {_id}.
+    This is most likely a copy and pasting error. There are lots of articles <Link to="/articles">here</Link>.
+  </div>);
+}
+
 export default function Error ({status}) {
   return status === "500" ? <ServerError/> : <NotFound/>;
 }

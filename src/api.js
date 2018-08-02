@@ -77,5 +77,10 @@ export function getArticlesForTopic (_id) {
   return fetch(`${BASE_URL}/topics/${_id}/articles`)
   .then(throwStatusOnError)
   .catch(returnStatusCode);
+}
 
+export function getArticlesForAuthor (_id) {
+  return fetch(`${BASE_URL}/users/${_id}/articles`)
+  .then(throwStatusOnError)
+  .catch(returnStatusCode);
 }

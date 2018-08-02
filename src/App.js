@@ -3,6 +3,7 @@ import React from 'react';
 import AllArticles from './AllArticles';
 import Article from './Article';
 import Topic from './Topic';
+import Author from './Author';
 import NavBar from './Navbar';
 import NewArticle from './NewArticle';
 import {NotFound} from './Error';
@@ -24,7 +25,7 @@ function App () {
           <Route exact path="/articles" component={AllArticles}/>
           <Route path="/articles/:_id" component={Article}/>
           <Route path="/topics/:_id" component={Topic}/>
-          {/* <Route path="/authors/:_id" component={ArticleList}/> */}
+          <Route path="/authors/:_id" component={Author}/>
           <Route exact path="/new" component={NewArticle}/>
 
           <Route component={NotFound}/>
