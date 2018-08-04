@@ -24,15 +24,12 @@ class AddComment extends React.Component{
       }
     })
     .then(response => {
-      if (response.ok) {
-        this.setState({active:false});
-      }
-      else throw new Error('problemSubmittingComment');
+      if (!response.ok) throw new Error('problemSubmittingComment');
       return response.json()
     })
     .then(({created}) => {
       this.props.addCommentToState(created)
-      this.setState({body:''});
+      this.setState({body:'', active: false});
     });
   }
 
