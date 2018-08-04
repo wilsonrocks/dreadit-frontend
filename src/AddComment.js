@@ -33,40 +33,34 @@ class AddComment extends React.Component{
     });
   }
 
-  handleKeys = event => {
-    if (event.key === 'Enter') this.submitComment();
-  }
-
   render () {
     const {body, active} = this.state;
     if (active) return (
-      <form>
+      <form onSubmit={this.submitComment}>
         <input
           type="text"
           className="input field"
           autoFocus
           onChange={({target:{value}}) => this.setState({body:value})}
-          onKeyPress={this.handleKeys}
           value={body}
         />
-      <div className="field is-grouped">
-        <button
-          type="button"
-          className="button control"
-          onClick={this.submitComment}
-          disabled={!body}
-        >
-          Submit Comment
-        </button>
+        <div className="field is-grouped">
+          <button
+            type="submit"
+            className="button control"
+            disabled={!body}
+          >
+            Submit Comment
+          </button>
 
-        <button
-          type="button"
-          className="button control"
-          onClick={()=>this.setState({active:false, body:''})}
-        >
-          Cancel
-        </button>
-      </div>
+          <button
+            type="button"
+            className="button control"
+            onClick={()=>this.setState({active:false, body:''})}
+          >
+            Cancel
+          </button>
+        </div>
 
       </form>
     );
